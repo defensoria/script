@@ -555,7 +555,7 @@ create table SIMCO.SIMCO_INTER_INTERVENCION
 create table SIMCO.SIMCO_INTER_MIEMBRO 
 (
    N_IDMIEMBRO          INTEGER              not null,
-   C_CODUSUARIO         VARCHAR2(10),
+   C_CODUSUARIO         VARCHAR2(20),
    N_ID_ETAPA           INTEGER,
    C_NOMBRE             VARCHAR2(300),
    C_ESTADO             CHAR(3),
@@ -1342,7 +1342,7 @@ create table SIMCO.SIMCO_SEG_AUDITORIA
 (
    CODIGO_AUDITORIA     VARCHAR2(10)         not null,
    CODIGO_ACCION        VARCHAR2(10),
-   CODIGO_USUARIO       VARCHAR2(10),
+   CODIGO_USUARIO       VARCHAR2(20),
    DETALLE              VARCHAR2(200),
    FECHA                DATE,
    IP                   VARCHAR2(30),
@@ -1429,7 +1429,7 @@ create index SIMCO.RELATIONSHIP_3_FK on SIMCO.SIMCO_SEG_ROL_RECURSO (
 /*==============================================================*/
 create table SIMCO.SIMCO_SEG_USUARIO 
 (
-   CODIGO_USUARIO       VARCHAR2(10)         not null,
+   CODIGO_USUARIO       VARCHAR2(20)         not null,
    NOM_USUARIO          VARCHAR2(80),
    APE_PATERNO          VARCHAR2(50),
    APE_MATERNO          VARCHAR2(50),
@@ -1451,7 +1451,7 @@ create table SIMCO.SIMCO_SEG_USUARIO
 create table SIMCO.SIMCO_SEG_USUARIO_ROL 
 (
    CODIGO_ROL           VARCHAR2(10)         not null,
-   CODIGO_USUARIO       VARCHAR2(10)         not null,
+   CODIGO_USUARIO       VARCHAR2(20)         not null,
    constraint PK_SIMCO_SEG_USUARIO_ROL primary key (CODIGO_ROL, CODIGO_USUARIO)
 );
 
