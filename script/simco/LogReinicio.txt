@@ -1,0 +1,132 @@
+SQL> 
+SQL> --==========================================================================================
+SQL> --EJECUCION DEL SCRIPT PARA RESETEAR LOS USUARIOS Y TABLESPACES DE LA BASE DE DATOS SIMCO
+SQL> --==========================================================================================
+SQL> @%simcodb_var%\0-Reiniciar/1-usuarios_tablespaces.sql
+SQL> 
+SQL> -- Drop the user
+SQL> DROP USER SIMCO CASCADE;
+DROP USER SIMCO CASCADE
+          *
+ERROR at line 1:
+ORA-01918: user 'SIMCO' does not exist 
+
+
+SQL> 
+SQL> -- Drop the TABLESPACE
+SQL> ALTER TABLESPACE SIMCO_DATA OFFLINE;
+ALTER TABLESPACE SIMCO_DATA OFFLINE
+*
+ERROR at line 1:
+ORA-00959: tablespace 'SIMCO_DATA' does not exist 
+
+
+SQL> DROP TABLESPACE SIMCO_DATA INCLUDING CONTENTS AND DATAFILES;
+DROP TABLESPACE SIMCO_DATA INCLUDING CONTENTS AND DATAFILES
+*
+ERROR at line 1:
+ORA-00959: tablespace 'SIMCO_DATA' does not exist 
+
+
+SQL> ALTER TABLESPACE SIMCO_INDEX OFFLINE;
+ALTER TABLESPACE SIMCO_INDEX OFFLINE
+*
+ERROR at line 1:
+ORA-00959: tablespace 'SIMCO_INDEX' does not exist 
+
+
+SQL> DROP TABLESPACE SIMCO_INDEX INCLUDING CONTENTS AND DATAFILES;
+DROP TABLESPACE SIMCO_INDEX INCLUDING CONTENTS AND DATAFILES
+*
+ERROR at line 1:
+ORA-00959: tablespace 'SIMCO_INDEX' does not exist 
+
+
+SQL> 
+SQL> ALTER TABLESPACE SIMCO_DATA_BLOB OFFLINE;
+ALTER TABLESPACE SIMCO_DATA_BLOB OFFLINE
+*
+ERROR at line 1:
+ORA-00959: tablespace 'SIMCO_DATA_BLOB' does not exist 
+
+
+SQL> DROP TABLESPACE SIMCO_DATA_BLOB INCLUDING CONTENTS AND DATAFILES;
+DROP TABLESPACE SIMCO_DATA_BLOB INCLUDING CONTENTS AND DATAFILES
+*
+ERROR at line 1:
+ORA-00959: tablespace 'SIMCO_DATA_BLOB' does not exist 
+
+
+SQL> ALTER TABLESPACE SIMCO_INDEX_BLOB OFFLINE;
+ALTER TABLESPACE SIMCO_INDEX_BLOB OFFLINE
+*
+ERROR at line 1:
+ORA-00959: tablespace 'SIMCO_INDEX_BLOB' does not exist 
+
+
+SQL> DROP TABLESPACE SIMCO_INDEX_BLOB INCLUDING CONTENTS AND DATAFILES;
+DROP TABLESPACE SIMCO_INDEX_BLOB INCLUDING CONTENTS AND DATAFILES
+*
+ERROR at line 1:
+ORA-00959: tablespace 'SIMCO_INDEX_BLOB' does not exist 
+
+
+SQL> 
+SQL> -- Create the TABLESPACE
+SQL> CREATE TABLESPACE SIMCO_DATA
+  2  DATAFILE 'c:\temp\SIMCO_DATA01.dbf' SIZE 100M
+  3  BLOCKSIZE 8k;
+
+Tablespace created.
+
+SQL> 
+SQL> CREATE TABLESPACE SIMCO_DATA_BLOB
+  2  DATAFILE 'c:\temp\SIMCO_DATA_BLOB01.dbf' SIZE 100M
+  3  BLOCKSIZE 8k;
+
+Tablespace created.
+
+SQL> 
+SQL> CREATE TABLESPACE SIMCO_INDEX
+  2  DATAFILE 'c:\temp\SIMCO_INDEX01.dbf' SIZE 40M
+  3  BLOCKSIZE 8k;
+
+Tablespace created.
+
+SQL> 
+SQL> CREATE TABLESPACE SIMCO_INDEX_BLOB
+  2  DATAFILE 'c:\temp\SIMCO_INDEX_BLOB01.dbf' SIZE 40M
+  3  BLOCKSIZE 8k;
+
+Tablespace created.
+
+SQL> 
+SQL> -- Create the user
+SQL> create user SIMCO
+  2    identified by SIMCO
+  3    default tablespace SIMCO_DATA;
+
+User created.
+
+SQL> 
+SQL> -- Grant/Revoke role privileges
+SQL> grant resource to SIMCO with admin option;
+
+Grant succeeded.
+
+SQL> grant create session to SIMCO with admin option;
+
+Grant succeeded.
+
+SQL> 
+SQL> -- Grant/Revoke role privileges for user view
+SQL> --grant create view to SIMCO;
+SQL> --grant select on siga.usuario to SIMCO;
+SQL> 
+SQL> 
+SQL> commit;
+
+Commit complete.
+
+SQL> 
+SQL> SPOOL OFF
